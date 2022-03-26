@@ -1,0 +1,9 @@
+shopBlock: "minecraft:barrel"
+
+# Hooking to other plugins
+WorldGuardHook: true
+
+# Messages
+messages:
+  enabled: "LunariMarket was successfully loaded."
+  disabled: "LunariMarket was successfully unloaded."

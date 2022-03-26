@@ -1,0 +1,8 @@
+name: LunariMarket
+version: '${version}'
+main: cz.lunari.lunarimarket.LunariMarket
+api-version: 1.18
+prefix: LunariMarket
+softdepend: [ WorldGuard, CoreProtect, Prism ]
+authors: [ Rehab_CZ ]
+description: Shop plugin for Lunari server
