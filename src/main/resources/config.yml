@@ -2,8 +2,18 @@ shopBlock: "minecraft:barrel"
 
 # Hooking to other plugins
 WorldGuardHook: true
+HolographicDisplaysHook: true
+
+# MySQL Database
+database:
+  dbHost: "localhost"
+  dbPort: 3306
+  dbName: "lunarimarket"
+  username: ""
+  password: ""
+
 
 # Messages
 messages:
-  enabled: "LunariMarket was successfully loaded."
-  disabled: "LunariMarket was successfully unloaded."
+  enabled: "Plugin was successfully loaded."
+  disabled: "Plugin was successfully unloaded."

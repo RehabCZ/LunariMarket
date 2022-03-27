@@ -19,11 +19,16 @@ repositories {
         name = 'worldguard'
         url "https://maven.enginehub.org/repo/"
     }
+    maven {
+        name= 'holographicdisplays'
+        url "https://repo.codemc.io/repository/maven-public/"
+    }
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.18.1-R0.1-SNAPSHOT'
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.1.0-SNAPSHOT'
+    compileOnly 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.9-SNAPSHOT'
 }
 
 def targetJavaVersion = 17

@@ -7,7 +7,7 @@ import java.io.File;
 
 public class ConfigHandler {
 
-    private static Plugin instance = LunariMarket.getInstance();
+    private static final Plugin instance = LunariMarket.getInstance();
 
     /* Initialize Config file */
     public static void initConfig()
@@ -20,12 +20,9 @@ public class ConfigHandler {
         if(getConfigString("shopBlock") == null){ setConfigString("shopBlock", "minecraft:barrel");}
     }
 
-    /* Save Config file */
-    public static void saveConfig(){ instance.saveConfig(); }
-
     /* Basic Config getters */
     public static String getConfigString(String key){ return instance.getConfig().getString(key); }
-    public static Double getConfigNumber(String key){ return instance.getConfig().getDouble(key); }
+    public static Integer getConfigNumber(String key){ return instance.getConfig().getInt(key); }
     public static Boolean getConfigBool(String key){ return instance.getConfig().getBoolean(key); }
 
     /* Basic Config setters */

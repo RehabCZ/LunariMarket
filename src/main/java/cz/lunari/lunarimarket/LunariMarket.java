@@ -1,6 +1,7 @@
 package cz.lunari.lunarimarket;
 
 import cz.lunari.lunarimarket.handlers.ConfigHandler;
+import cz.lunari.lunarimarket.handlers.DatabaseHandler;
 import cz.lunari.lunarimarket.handlers.HooksHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,22 +25,21 @@ public final class LunariMarket extends JavaPlugin {
     @Override
     public void onEnable() {
 
+        /* Initialize MySQL connection */
+        DatabaseHandler.initializeConnection();
+
         /* Hello message */
-        this.getServer().getConsoleSender().sendMessage(
-                ConfigHandler.getConfigString("messages.enabled")
-        );
+        sendConsole(ConfigHandler.getConfigString("messages.enabled"));
     }
 
     @Override
     public void onDisable() {
 
-        /* Save config file */
-        ConfigHandler.saveConfig();
+        /* Close MySQL connection */
+        DatabaseHandler.closeConnection();
 
         /* Bye message */
-        this.getServer().getConsoleSender().sendMessage(
-                ConfigHandler.getConfigString("messages.disabled")
-        );
+        sendConsole(ConfigHandler.getConfigString("messages.disabled"));
 
         /* Deconstruct instance */
         instance = null;
@@ -47,4 +47,10 @@ public final class LunariMarket extends JavaPlugin {
 
     /* Instance getter */
     public static LunariMarket getInstance(){ return instance; }
+
+    /* Console send method */
+    public static void sendConsole(String message)
+    {
+        instance.getServer().getConsoleSender().sendMessage("[LunariMarket] " + message);
+    }
 }
