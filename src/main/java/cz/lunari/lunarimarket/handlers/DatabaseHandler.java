@@ -37,7 +37,7 @@ public class DatabaseHandler {
         }
     }
 
-    public static void checkConnection()
+    private static void checkConnection()
     {
         try {
             if (connection == null || connection.isClosed() || !connection.isValid(0))

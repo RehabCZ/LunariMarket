@@ -3,6 +3,7 @@ package cz.lunari.lunarimarket;
 import cz.lunari.lunarimarket.handlers.ConfigHandler;
 import cz.lunari.lunarimarket.handlers.DatabaseHandler;
 import cz.lunari.lunarimarket.handlers.HooksHandler;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class LunariMarket extends JavaPlugin {
@@ -51,6 +52,6 @@ public final class LunariMarket extends JavaPlugin {
     /* Console send method */
     public static void sendConsole(String message)
     {
-        instance.getServer().getConsoleSender().sendMessage("[LunariMarket] " + message);
+        instance.getServer().getConsoleSender().sendMessage("[LunariMarket] "+ ChatColor.GRAY + message);
     }
 }
