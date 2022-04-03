@@ -2,7 +2,7 @@ package cz.lunari.lunarimarket.plugins;
 
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import cz.lunari.lunarimarket.LunariMarket;
-import cz.lunari.lunarimarket.handlers.ConfigHandler;
+import cz.lunari.lunarimarket.config.Config;
 import cz.lunari.lunarimarket.interfaces.IPluginHook;
 import cz.lunari.lunarimarket.utils.HDPlaceholders;
 import org.bukkit.Bukkit;
@@ -27,7 +27,7 @@ public class HDHook implements IPluginHook {
 
     @Override
     public Boolean isEnabled() {
-        return ConfigHandler.getConfigBool("HolographicDisplaysHook");
+        return Config.getConfigBool("HolographicDisplaysHook");
     }
 
     @Override

@@ -1,6 +1,6 @@
 package cz.lunari.lunarimarket;
 
-import cz.lunari.lunarimarket.handlers.ConfigHandler;
+import cz.lunari.lunarimarket.config.Config;
 import cz.lunari.lunarimarket.handlers.DatabaseHandler;
 import cz.lunari.lunarimarket.handlers.HooksHandler;
 import org.bukkit.ChatColor;
@@ -16,7 +16,7 @@ public final class LunariMarket extends JavaPlugin {
         instance = this;
 
         /* Initialize config file */
-        ConfigHandler.initConfig();
+        Config.initConfig();
 
         /* Initialize Hooks */
         HooksHandler pluginHook = new HooksHandler();
@@ -30,7 +30,7 @@ public final class LunariMarket extends JavaPlugin {
         DatabaseHandler.initializeConnection();
 
         /* Hello message */
-        sendConsole(ConfigHandler.getConfigString("messages.enabled"));
+        sendConsole(Config.getConfigString("messages.enabled"));
     }
 
     @Override
@@ -40,7 +40,7 @@ public final class LunariMarket extends JavaPlugin {
         DatabaseHandler.closeConnection();
 
         /* Bye message */
-        sendConsole(ConfigHandler.getConfigString("messages.disabled"));
+        sendConsole(Config.getConfigString("messages.disabled"));
 
         /* Deconstruct instance */
         instance = null;

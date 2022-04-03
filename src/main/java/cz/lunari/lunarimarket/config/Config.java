@@ -1,11 +1,11 @@
-package cz.lunari.lunarimarket.handlers;
+package cz.lunari.lunarimarket.config;
 
 import cz.lunari.lunarimarket.LunariMarket;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 
-public class ConfigHandler {
+public class Config {
 
     private static final Plugin instance = LunariMarket.getInstance();
 

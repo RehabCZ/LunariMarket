@@ -4,7 +4,7 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
-import cz.lunari.lunarimarket.handlers.ConfigHandler;
+import cz.lunari.lunarimarket.config.Config;
 import cz.lunari.lunarimarket.interfaces.IPluginHook;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -28,7 +28,7 @@ public class WGHook implements IPluginHook {
 
     @Override
     public Boolean isEnabled() {
-        return ConfigHandler.getConfigBool("WorldGuardHook");
+        return Config.getConfigBool("WorldGuardHook");
     }
 
     @Override

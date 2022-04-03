@@ -23,12 +23,17 @@ repositories {
         name= 'holographicdisplays'
         url "https://repo.codemc.io/repository/maven-public/"
     }
+    maven {
+        name= 'coreprotect'
+        url "https://maven.playpro.com/"
+    }
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.18.1-R0.1-SNAPSHOT'
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.1.0-SNAPSHOT'
     compileOnly 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.9-SNAPSHOT'
+    compileOnly 'net.coreprotect:coreprotect:21.2'
 }
 
 def targetJavaVersion = 17

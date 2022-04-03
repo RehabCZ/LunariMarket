@@ -1,6 +1,7 @@
 package cz.lunari.lunarimarket.handlers;
 
 import cz.lunari.lunarimarket.LunariMarket;
+import cz.lunari.lunarimarket.config.Config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +11,11 @@ public class DatabaseHandler {
 
     private static Connection connection;
 
-    private static final String DATABASE_HOST = ConfigHandler.getConfigString("database.dbHost");
-    private static final Integer DATABASE_PORT = ConfigHandler.getConfigNumber("database.dbPort");
-    private static final String DATABASE_NAME = ConfigHandler.getConfigString("database.dbName");
-    private static final String USERNAME = ConfigHandler.getConfigString("database.username");
-    private static final String PASSWORD = ConfigHandler.getConfigString("database.password");
+    private static final String DATABASE_HOST = Config.getConfigString("database.dbHost");
+    private static final Integer DATABASE_PORT = Config.getConfigNumber("database.dbPort");
+    private static final String DATABASE_NAME = Config.getConfigString("database.dbName");
+    private static final String USERNAME = Config.getConfigString("database.username");
+    private static final String PASSWORD = Config.getConfigString("database.password");
 
     public static void initializeConnection() {
         try {
