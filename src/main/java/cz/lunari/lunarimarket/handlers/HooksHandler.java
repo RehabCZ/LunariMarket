@@ -3,8 +3,7 @@ package cz.lunari.lunarimarket.handlers;
 import cz.lunari.lunarimarket.interfaces.IPluginHook;
 import cz.lunari.lunarimarket.plugins.HDHook;
 import cz.lunari.lunarimarket.plugins.WGHook;
-import cz.lunari.lunarimarket.LunariMarket;
-import org.bukkit.ChatColor;
+import cz.lunari.lunarimarket.utils.ChatUtils;
 
 import java.util.ArrayList;
 
@@ -17,20 +16,19 @@ public class HooksHandler {
         IPluginHook.add(new HDHook());
     }
 
-    public void initHooks()
-    {
-        for(int i = 0; i < getHook().size(); i++){
-            if(getHook().get(i).plInstance() != null && getHook().get(i).isEnabled()) {
+    public void initHooks() {
+        for (int i = 0; i < getHook().size(); i++) {
+            if (getHook().get(i).bukkitInstance() != null && getHook().get(i).isEnabled()) {
                 getHook().get(i).loadHook();
-                LunariMarket.sendConsole(
-                        ChatColor.GRAY + "Plugin hook " +
-                        ChatColor.GREEN + getHook().get(i).plName() +
-                        ChatColor.GRAY +" was successfully initialized."
+                ChatUtils.logConsole(
+                        "&7Plugin hook&2 " + getHook().get(i).plName() + " &7was successfully initialized."
                 );
             }
         }
     }
 
-    public ArrayList<IPluginHook> getHook(){ return IPluginHook; }
+    public ArrayList<IPluginHook> getHook() {
+        return IPluginHook;
+    }
 
 }

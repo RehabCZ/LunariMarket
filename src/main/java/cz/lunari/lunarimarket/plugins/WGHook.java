@@ -11,15 +11,18 @@ import org.bukkit.plugin.Plugin;
 
 public class WGHook implements IPluginHook {
 
+
     private StateFlag SHOP_FLAG;
 
     @Override
-    public Plugin plInstance() {
-        return Bukkit.getPluginManager().getPlugin("WorldGuard");
+    public Plugin bukkitInstance() {
+        return Bukkit.getPluginManager().getPlugin(plName());
     }
 
     @Override
-    public String plName() { return "WorldGuard"; }
+    public String plName() {
+        return "WorldGuard";
+    }
 
     @Override
     public String plVersion() {
@@ -34,13 +37,13 @@ public class WGHook implements IPluginHook {
     @Override
     public void loadHook() {
         FlagRegistry flagReg = WorldGuard.getInstance().getFlagRegistry();
-
-        try
-        {
-            StateFlag flag = new StateFlag("lunarimarket",false);
+        try {
+            StateFlag flag = new StateFlag("lunarimarket", false);
             flagReg.register(flag);
             SHOP_FLAG = flag;
-        } catch (FlagConflictException e){ e.printStackTrace(); }
+        } catch (FlagConflictException e) {
+            e.printStackTrace();
+        }
     }
 
 }

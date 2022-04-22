@@ -1,18 +1,15 @@
 package cz.lunari.lunarimarket.plugins;
 
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
-import cz.lunari.lunarimarket.LunariMarket;
 import cz.lunari.lunarimarket.config.Config;
 import cz.lunari.lunarimarket.interfaces.IPluginHook;
-import cz.lunari.lunarimarket.utils.HDPlaceholders;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 public class HDHook implements IPluginHook {
 
     @Override
-    public Plugin plInstance() {
-        return Bukkit.getPluginManager().getPlugin("HolographicDisplays");
+    public Plugin bukkitInstance() {
+        return Bukkit.getPluginManager().getPlugin(plName());
     }
 
     @Override
@@ -32,11 +29,6 @@ public class HDHook implements IPluginHook {
 
     @Override
     public void loadHook() {
-        try {
-            if(Bukkit.getPluginManager().isPluginEnabled(plName())){
-                HologramsAPI.registerPlaceholder(LunariMarket.getInstance(), "{plugins}", 1.0,
-                        new HDPlaceholders(Bukkit.getServer().getPluginManager().getPlugins().length));
-            }
-        } catch (Exception e){ e.printStackTrace(); }
+        //TODO initialize palceholders in later stages
     }
 }

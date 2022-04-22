@@ -10,7 +10,7 @@ public class Config {
     private static final Plugin instance = LunariMarket.getInstance();
 
     /* Initialize Config file */
-    public static void initConfig()
+    public void initConfig()
     {
         File configFile = new File(instance.getDataFolder(), "config.yml");
 

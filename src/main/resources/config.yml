@@ -15,5 +15,5 @@ database:
 
 # Messages
 messages:
-  enabled: "Plugin was successfully loaded."
-  disabled: "Plugin was successfully unloaded."
+  enabled: "&2Plugin was successfully loaded."
+  disabled: "&2Plugin was successfully unloaded."
