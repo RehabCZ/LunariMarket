@@ -6,3 +6,8 @@ prefix: LunariMarket
 softdepend: [ WGHook, CoreProtect, Prism, HDHook ]
 authors: [ Rehab_CZ ]
 description: Shop plugin for Lunari server
+commands:
+  lunarimarket:
+    description: Main command executor
+    aliases: [lm, market]
+    usage: /<command>

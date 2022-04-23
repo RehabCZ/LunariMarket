@@ -8,17 +8,17 @@ import org.bukkit.plugin.Plugin;
 public class HDHook implements IPluginHook {
 
     @Override
-    public Plugin bukkitInstance() {
-        return Bukkit.getPluginManager().getPlugin(plName());
+    public Plugin getInstance() {
+        return Bukkit.getPluginManager().getPlugin(getName());
     }
 
     @Override
-    public String plName() {
+    public String getName() {
         return "HolographicDisplays";
     }
 
     @Override
-    public String plVersion() {
+    public String getVersion() {
         return "2.4.9";
     }
 
@@ -28,7 +28,7 @@ public class HDHook implements IPluginHook {
     }
 
     @Override
-    public void loadHook() {
+    public void execute() {
         //TODO initialize palceholders in later stages
     }
 }

@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'java-library'
 }
 
 group = 'cz.lunari'
@@ -20,11 +20,11 @@ repositories {
         url "https://maven.enginehub.org/repo/"
     }
     maven {
-        name= 'holographicdisplays'
+        name = 'holographicdisplays'
         url "https://repo.codemc.io/repository/maven-public/"
     }
     maven {
-        name= 'coreprotect'
+        name = 'coreprotect'
         url "https://maven.playpro.com/"
     }
 }
@@ -35,6 +35,7 @@ dependencies {
     compileOnly 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.9-SNAPSHOT'
     compileOnly 'net.coreprotect:coreprotect:21.2'
 }
+
 
 def targetJavaVersion = 17
 java {

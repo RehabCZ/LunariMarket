@@ -1,8 +1,10 @@
 package cz.lunari.lunarimarket;
 
 import cz.lunari.lunarimarket.config.Config;
+import cz.lunari.lunarimarket.handlers.CommandHandler;
 import cz.lunari.lunarimarket.handlers.DatabaseHandler;
 import cz.lunari.lunarimarket.handlers.HooksHandler;
+import cz.lunari.lunarimarket.handlers.ListenerHandler;
 import cz.lunari.lunarimarket.utils.ChatUtils;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,6 +14,7 @@ public final class LunariMarket extends JavaPlugin {
 
     DatabaseHandler dbHandler;
     HooksHandler pluginHook;
+    ListenerHandler listenerHandler;
     Config config;
 
     @Override
@@ -31,9 +34,16 @@ public final class LunariMarket extends JavaPlugin {
     @Override
     public void onEnable() {
 
+        /* Initialize Events Listener handler */
+        listenerHandler = new ListenerHandler();
+        listenerHandler.initListeners();
+
         /* Initialize MySQL connection */
         dbHandler = new DatabaseHandler();
         dbHandler.initializeConnection();
+
+        /* Initialize Command handler */
+        getCommand("lunarimarket").setExecutor(new CommandHandler());
 
         /* Hello message */
         ChatUtils.logConsole(Config.getConfigString("messages.enabled"));

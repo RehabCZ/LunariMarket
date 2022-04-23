@@ -18,10 +18,10 @@ public class HooksHandler {
 
     public void initHooks() {
         for (int i = 0; i < getHook().size(); i++) {
-            if (getHook().get(i).bukkitInstance() != null && getHook().get(i).isEnabled()) {
-                getHook().get(i).loadHook();
+            if (getHook().get(i).getInstance() != null && getHook().get(i).isEnabled()) {
+                getHook().get(i).execute();
                 ChatUtils.logConsole(
-                        "&7Plugin hook&2 " + getHook().get(i).plName() + " &7was successfully initialized."
+                        "&7Plugin hook&2 " + getHook().get(i).getName() + " &7was successfully initialized."
                 );
             }
         }

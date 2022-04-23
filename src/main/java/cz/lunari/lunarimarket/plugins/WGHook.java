@@ -15,17 +15,17 @@ public class WGHook implements IPluginHook {
     private StateFlag SHOP_FLAG;
 
     @Override
-    public Plugin bukkitInstance() {
-        return Bukkit.getPluginManager().getPlugin(plName());
+    public Plugin getInstance() {
+        return Bukkit.getPluginManager().getPlugin(getName());
     }
 
     @Override
-    public String plName() {
+    public String getName() {
         return "WorldGuard";
     }
 
     @Override
-    public String plVersion() {
+    public String getVersion() {
         return WorldGuard.getVersion();
     }
 
@@ -35,7 +35,7 @@ public class WGHook implements IPluginHook {
     }
 
     @Override
-    public void loadHook() {
+    public void execute() {
         FlagRegistry flagReg = WorldGuard.getInstance().getFlagRegistry();
         try {
             StateFlag flag = new StateFlag("lunarimarket", false);
