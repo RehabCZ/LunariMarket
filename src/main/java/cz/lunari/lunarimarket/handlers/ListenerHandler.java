@@ -1,7 +1,7 @@
 package cz.lunari.lunarimarket.handlers;
 
 import cz.lunari.lunarimarket.LunariMarket;
-import cz.lunari.lunarimarket.listeners.onPlayerJoinEvent;
+import cz.lunari.lunarimarket.listeners.MenuClickEvent;
 import cz.lunari.lunarimarket.utils.ChatUtils;
 import org.bukkit.event.Listener;
 
@@ -13,7 +13,7 @@ public class ListenerHandler {
     private final ArrayList<Listener> listeners = new ArrayList<>();
 
     public ListenerHandler() {
-        listeners.add(new onPlayerJoinEvent());
+        listeners.add(new MenuClickEvent());
     }
 
     public void initListeners() {

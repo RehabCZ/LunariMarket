@@ -1,6 +1,7 @@
 package cz.lunari.lunarimarket.handlers;
 
 import cz.lunari.lunarimarket.commands.AboutCommand;
+import cz.lunari.lunarimarket.commands.MenuCommand;
 import cz.lunari.lunarimarket.interfaces.ICommand;
 import cz.lunari.lunarimarket.utils.ChatUtils;
 import org.bukkit.command.CommandExecutor;
@@ -11,10 +12,11 @@ import java.util.ArrayList;
 
 public class CommandHandler implements CommandExecutor {
 
-    private ArrayList<ICommand> commands = new ArrayList<>();
+    private final ArrayList<ICommand> commands = new ArrayList<>();
 
     public CommandHandler() {
         commands.add(new AboutCommand());
+        commands.add(new MenuCommand());
     }
 
     @Override
@@ -28,8 +30,8 @@ public class CommandHandler implements CommandExecutor {
                         getCommand().get(i).execute(player, args);
                     }
                 }
-            } else if (args.length == 0 || args[0] == "help") {
-                player.sendMessage(ChatUtils.translateColors("&8&l>&m============&8&l[&6&lLunariMarket&8&l]&m============&8&l<"));
+            } else if (args.length == 0 || args[0].equals("help")) {
+                player.sendMessage(ChatUtils.translateColors("&8&l>&m============&8&l[&6&lLunari Market&8&l]&m============&8&l<"));
                 for (int i = 0; i < getCommand().size(); i++) {
                     player.sendMessage(getCommand().get(i).getSyntax() + " - " + getCommand().get(i).getDescription());
                 }
