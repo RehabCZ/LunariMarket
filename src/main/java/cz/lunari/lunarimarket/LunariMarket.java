@@ -5,7 +5,7 @@ import cz.lunari.lunarimarket.handlers.CommandHandler;
 import cz.lunari.lunarimarket.handlers.DatabaseHandler;
 import cz.lunari.lunarimarket.handlers.HooksHandler;
 import cz.lunari.lunarimarket.handlers.ListenerHandler;
-import cz.lunari.lunarimarket.utils.ChatUtils;
+import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class LunariMarket extends JavaPlugin {
@@ -46,7 +46,7 @@ public final class LunariMarket extends JavaPlugin {
         getCommand("lunarimarket").setExecutor(new CommandHandler());
 
         /* Hello message */
-        ChatUtils.logConsole(Config.getConfigString("messages.enabled"));
+        ChatMessageUtils.logConsole(Config.getConfigString("messages.enabled"));
     }
 
     @Override
@@ -56,7 +56,7 @@ public final class LunariMarket extends JavaPlugin {
         dbHandler.closeConnection();
 
         /* Bye message */
-        ChatUtils.logConsole(Config.getConfigString("messages.disabled"));
+        ChatMessageUtils.logConsole(Config.getConfigString("messages.disabled"));
 
         /* Deconstruct instance */
         instance = null;

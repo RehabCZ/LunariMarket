@@ -1,18 +1,17 @@
 package cz.lunari.lunarimarket.commands;
 
 import cz.lunari.lunarimarket.interfaces.ICommand;
-import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 import org.bukkit.entity.Player;
 
-public class AboutCommand implements ICommand {
+public class HelpCommand implements ICommand {
     @Override
     public String getName() {
-        return "about";
+        return "help";
     }
 
     @Override
     public String getDescription() {
-        return "About this plugin";
+        return "Help command";
     }
 
     @Override
@@ -22,11 +21,12 @@ public class AboutCommand implements ICommand {
 
     @Override
     public String getSyntax() {
-        return "/lunarimarket about";
+        return "/lunarimarket help";
     }
 
     @Override
     public void execute(Player player, String[] args) {
-        player.sendMessage(ChatMessageUtils.translateColors("&7Plugin made with &4\u2764&7 by Rehab_CZ"));
+        // Just alias for plain command without args to display help command
+        player.performCommand("lunarimarket");
     }
 }

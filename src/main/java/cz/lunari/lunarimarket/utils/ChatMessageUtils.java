@@ -3,7 +3,7 @@ package cz.lunari.lunarimarket.utils;
 import cz.lunari.lunarimarket.LunariMarket;
 import org.bukkit.ChatColor;
 
-public class ChatUtils {
+public class ChatMessageUtils {
 
     public static String translateColors(String message){
         return ChatColor.translateAlternateColorCodes('&', message);

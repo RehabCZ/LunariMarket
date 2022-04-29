@@ -2,7 +2,7 @@ package cz.lunari.lunarimarket.handlers;
 
 import cz.lunari.lunarimarket.LunariMarket;
 import cz.lunari.lunarimarket.listeners.MenuClickEvent;
-import cz.lunari.lunarimarket.utils.ChatUtils;
+import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 import org.bukkit.event.Listener;
 
 import java.lang.reflect.InvocationTargetException;
@@ -18,7 +18,7 @@ public class ListenerHandler {
 
     public void initListeners() {
         for (int i = 0; i < getListener().size(); i++) {
-            ChatUtils.logConsole(
+            ChatMessageUtils.logConsole(
                     "&7Event listener&2 " + getListener().get(i).getClass().getSimpleName() + " &7was successfully initialized."
             );
             try {

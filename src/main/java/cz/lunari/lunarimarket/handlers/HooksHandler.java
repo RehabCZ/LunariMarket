@@ -3,7 +3,7 @@ package cz.lunari.lunarimarket.handlers;
 import cz.lunari.lunarimarket.interfaces.IPluginHook;
 import cz.lunari.lunarimarket.plugins.HDHook;
 import cz.lunari.lunarimarket.plugins.WGHook;
-import cz.lunari.lunarimarket.utils.ChatUtils;
+import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,7 @@ public class HooksHandler {
         for (int i = 0; i < getHook().size(); i++) {
             if (getHook().get(i).getInstance() != null && getHook().get(i).isEnabled()) {
                 getHook().get(i).execute();
-                ChatUtils.logConsole(
+                ChatMessageUtils.logConsole(
                         "&7Plugin hook&2 " + getHook().get(i).getName() + " &7was successfully initialized."
                 );
             }

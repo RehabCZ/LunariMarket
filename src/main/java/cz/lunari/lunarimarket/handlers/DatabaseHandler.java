@@ -1,7 +1,7 @@
 package cz.lunari.lunarimarket.handlers;
 
 import cz.lunari.lunarimarket.config.Config;
-import cz.lunari.lunarimarket.utils.ChatUtils;
+import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,11 +24,11 @@ public class DatabaseHandler {
             );
 
             if (!(tableExist("markets")) || !(tableExist("vaults"))) {
-                ChatUtils.logConsole("&cSQL Tables not found generating them!");
+                ChatMessageUtils.logConsole("&cSQL Tables not found generating them!");
                 createTables();
             }
 
-            ChatUtils.logConsole("&7Connection with &2MySQL database&7 was successfully initialized.");
+            ChatMessageUtils.logConsole("&7Connection with &2MySQL database&7 was successfully initialized.");
 
         } catch (SQLException e) {
             e.printStackTrace();
