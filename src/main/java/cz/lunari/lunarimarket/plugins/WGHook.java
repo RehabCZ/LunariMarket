@@ -5,11 +5,11 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import cz.lunari.lunarimarket.config.Config;
-import cz.lunari.lunarimarket.interfaces.IPluginHook;
+import cz.lunari.lunarimarket.interfaces.IIntegration;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
-public class WGHook implements IPluginHook {
+public class WGHook implements IIntegration {
 
 
     private StateFlag SHOP_FLAG;

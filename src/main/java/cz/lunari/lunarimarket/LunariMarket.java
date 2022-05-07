@@ -3,7 +3,7 @@ package cz.lunari.lunarimarket;
 import cz.lunari.lunarimarket.config.Config;
 import cz.lunari.lunarimarket.handlers.CommandHandler;
 import cz.lunari.lunarimarket.handlers.DatabaseHandler;
-import cz.lunari.lunarimarket.handlers.HooksHandler;
+import cz.lunari.lunarimarket.handlers.IntegrationHandler;
 import cz.lunari.lunarimarket.handlers.ListenerHandler;
 import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,7 +13,7 @@ public final class LunariMarket extends JavaPlugin {
     private static LunariMarket instance;
 
     DatabaseHandler dbHandler;
-    HooksHandler pluginHook;
+    IntegrationHandler pluginIntegration;
     ListenerHandler listenerHandler;
     Config config;
 
@@ -27,8 +27,8 @@ public final class LunariMarket extends JavaPlugin {
         config.initConfig();
 
         /* Initialize Hooks */
-        pluginHook = new HooksHandler();
-        pluginHook.initHooks();
+        pluginIntegration = new IntegrationHandler();
+        pluginIntegration.initIntegration();
     }
 
     @Override
