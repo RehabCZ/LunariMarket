@@ -1,7 +1,7 @@
 package cz.lunari.lunarimarket.handlers;
 
 import cz.lunari.lunarimarket.interfaces.IIntegration;
-import cz.lunari.lunarimarket.plugins.WGHook;
+import cz.lunari.lunarimarket.plugins.WGIntegration;
 import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class IntegrationHandler {
     private final ArrayList<IIntegration> IIntegration = new ArrayList<>();
 
     public IntegrationHandler() {
-        IIntegration.add(new WGHook());
+        IIntegration.add(new WGIntegration());
     }
 
     public void initIntegration() {

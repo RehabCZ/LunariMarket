@@ -9,7 +9,7 @@ import cz.lunari.lunarimarket.interfaces.IIntegration;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
-public class WGHook implements IIntegration {
+public class WGIntegration implements IIntegration {
 
 
     private StateFlag SHOP_FLAG;
