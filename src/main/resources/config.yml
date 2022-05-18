@@ -1,16 +1,43 @@
-shopBlock: "minecraft:barrel"
-
 # Hooking to other plugins
 WorldGuardHook: true
-HolographicDisplaysHook: true
 
-# MySQL Database
+# MySQL Database configuration
+# Currently required (and recommended) way to store data
 database:
   dbHost: "localhost"
   dbPort: 3306
   dbName: "lunarimarket"
   username: ""
   password: ""
+
+# Shop container block configuration
+# [BARREL, CHEST, TRAPPED_CHEST, SHULKER_BOX]
+shopBlocks:
+  - "BARREL"
+
+# Shop action particles configuration
+# [ https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Particle.html#enum-constant-summary ]
+showParticles: true
+particles:
+  shop_delete: "FLAME"
+  shop_create: "VILLAGER_HAPPY"
+  shop_empty: "SOUL"
+  shop_buy: "HEART"
+  vault_delete: "FLAME"
+  vault_create: "VILLAGER_HAPPY"
+  vault_full: "VILLAGER_ANGRY"
+
+# Shop action sounds configuration
+# [ https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html#enum-constant-summary ]
+playSounds: true
+sounds:
+  shop_delete: "ENTITY_ITEM_BREAK"
+  shop_create: "BLOCK_ANVIL_USE"
+  shop_empty: "BLOCK_LAVA_EXTINGUISH"
+  shop_buy: "ENTITY_EXPERIENCE_ORB_PICKUP"
+  vault_delete: "ENTITY_ITEM_BREAK"
+  vault_create: "BLOCK_ANVIL_USE"
+  vault_full: "ENTITY_BLAZE_DEATH"
 
 
 # Messages
