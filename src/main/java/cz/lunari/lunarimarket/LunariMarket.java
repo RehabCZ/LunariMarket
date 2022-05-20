@@ -1,69 +1,64 @@
 package cz.lunari.lunarimarket;
 
-import cz.lunari.lunarimarket.config.Config;
-import cz.lunari.lunarimarket.handlers.CommandHandler;
-import cz.lunari.lunarimarket.handlers.DatabaseHandler;
-import cz.lunari.lunarimarket.handlers.IntegrationHandler;
-import cz.lunari.lunarimarket.handlers.ListenerHandler;
+import cz.lunari.lunarimarket.managers.ConfigManager;
+import cz.lunari.lunarimarket.managers.CommandManager;
+import cz.lunari.lunarimarket.managers.DatabaseManager;
+import cz.lunari.lunarimarket.managers.IntegrationManager;
+import cz.lunari.lunarimarket.managers.ListenerManager;
 import cz.lunari.lunarimarket.utils.ChatMessageUtils;
+import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Objects;
+
+@Getter
 public final class LunariMarket extends JavaPlugin {
 
+    @Getter
     private static LunariMarket instance;
 
-    DatabaseHandler dbHandler;
-    IntegrationHandler pluginIntegration;
-    ListenerHandler listenerHandler;
-    Config config;
+    private ConfigManager configManager;
+
+    private DatabaseManager databaseManager;
+    private IntegrationManager integrationManager;
+    private ListenerManager listenerManager;
 
     @Override
     public void onLoad() {
         /* Construct instance */
         instance = this;
 
-        /* Initialize config file */
-        config = new Config();
-        config.initConfig();
+        /* Initialize configManager file */
+        configManager = new ConfigManager(this);
 
         /* Initialize Hooks */
-        pluginIntegration = new IntegrationHandler();
-        pluginIntegration.initIntegration();
+        integrationManager = new IntegrationManager();
     }
 
     @Override
     public void onEnable() {
-
         /* Initialize Events Listener handler */
-        listenerHandler = new ListenerHandler();
-        listenerHandler.initListeners();
+        listenerManager = new ListenerManager(this);
 
         /* Initialize MySQL connection */
-        dbHandler = new DatabaseHandler();
-        dbHandler.initializeConnection();
+        databaseManager = new DatabaseManager();
 
         /* Initialize Command handler */
-        getCommand("lunarimarket").setExecutor(new CommandHandler());
+        Objects.requireNonNull(getCommand("lunarimarket")).setExecutor(new CommandManager());
 
         /* Hello message */
-        ChatMessageUtils.logConsole(Config.getConfigString("messages.enabled"));
+        ChatMessageUtils.logConsole(ConfigManager.getString("messages.enabled"));
     }
 
     @Override
     public void onDisable() {
-
         /* Close MySQL connection */
-        dbHandler.closeConnection();
+        databaseManager.closeConnection();
 
         /* Bye message */
-        ChatMessageUtils.logConsole(Config.getConfigString("messages.disabled"));
+        ChatMessageUtils.logConsole(ConfigManager.getString("messages.disabled"));
 
         /* Deconstruct instance */
         instance = null;
-    }
-
-    /* Instance getter */
-    public static LunariMarket getInstance() {
-        return instance;
     }
 }

@@ -5,6 +5,7 @@ import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 import org.bukkit.entity.Player;
 
 public class AboutCommand implements ICommand {
+
     @Override
     public String getName() {
         return "about";

@@ -4,15 +4,16 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
-import cz.lunari.lunarimarket.config.Config;
+import cz.lunari.lunarimarket.managers.ConfigManager;
 import cz.lunari.lunarimarket.interfaces.IIntegration;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 public class WGIntegration implements IIntegration {
 
-
-    private StateFlag SHOP_FLAG;
+    @Getter
+    private StateFlag shopFlag;
 
     @Override
     public Plugin getInstance() {
@@ -30,20 +31,21 @@ public class WGIntegration implements IIntegration {
     }
 
     @Override
-    public Boolean isEnabled() {
-        return Config.getConfigBool("WorldGuardHook");
+    public boolean isEnabled() {
+        return ConfigManager.getBoolean("WorldGuardHook");
     }
 
     @Override
     public void execute() {
         FlagRegistry flagReg = WorldGuard.getInstance().getFlagRegistry();
+
         try {
             StateFlag flag = new StateFlag("lunarimarket", false);
             flagReg.register(flag);
-            SHOP_FLAG = flag;
+
+            shopFlag = flag;
         } catch (FlagConflictException e) {
             e.printStackTrace();
         }
     }
-
 }

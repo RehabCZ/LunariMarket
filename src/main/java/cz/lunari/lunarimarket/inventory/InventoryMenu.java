@@ -1,19 +1,20 @@
 package cz.lunari.lunarimarket.inventory;
 
-import cz.lunari.lunarimarket.utils.InventoryHolderUtils;
+import cz.lunari.lunarimarket.objects.InventoryOwner;
 import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class InventoryMenu implements InventoryHolder {
 
     protected Inventory inventory;
 
-    protected InventoryHolderUtils inventoryHolderUtils;
+    protected InventoryOwner inventoryOwner;
 
-    public InventoryMenu(InventoryHolderUtils invUtils){
-        this.inventoryHolderUtils = invUtils;
+    public InventoryMenu(InventoryOwner inventoryOwner){
+        this.inventoryOwner = inventoryOwner;
     }
 
     public abstract String getInventoryName();
@@ -26,13 +27,14 @@ public abstract class InventoryMenu implements InventoryHolder {
 
     public void openInventoryMenu(){
         inventory = Bukkit.createInventory(this, getInventorySlots(), getInventoryName());
-        this.setMenuItems();
-        inventoryHolderUtils.getOwner().openInventory(inventory);
+
+        setMenuItems();
+
+        inventoryOwner.getOwner().openInventory(inventory);
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NotNull Inventory getInventory() {
         return inventory;
     }
-
 }

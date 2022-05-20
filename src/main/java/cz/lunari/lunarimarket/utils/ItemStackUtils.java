@@ -12,24 +12,31 @@ import java.util.List;
 public class ItemStackUtils {
 
     public static ItemStack createSimpleItem(Material material, String title, List<String> lore){
-
         ItemStack item = new ItemStack(material, 1);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(title);
-        meta.setLore(lore);
-        item.setItemMeta(meta);
+
+        if (meta != null) {
+            meta.setDisplayName(title);
+            meta.setLore(lore);
+
+            item.setItemMeta(meta);
+        }
+
         return item;
     }
 
-    public static ItemStack createPlayerSkull(Player player, String title, List<String> lore)
-    {
+    public static ItemStack createPlayerSkull(Player player, String title, List<String> lore) {
         ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1);
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
-        meta.setOwningPlayer(Bukkit.getOfflinePlayer(player.getUniqueId()));
-        meta.setDisplayName(title);
-        meta.setLore(lore);
-        skull.setItemMeta(meta);
+
+        if (meta != null) {
+            meta.setOwningPlayer(Bukkit.getOfflinePlayer(player.getUniqueId()));
+            meta.setDisplayName(title);
+            meta.setLore(lore);
+
+            skull.setItemMeta(meta);
+        }
+
         return skull;
     }
-
 }

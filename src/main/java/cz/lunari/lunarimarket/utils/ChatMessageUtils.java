@@ -13,5 +13,4 @@ public class ChatMessageUtils {
     public static void logConsole(String message) {
         LunariMarket.getInstance().getServer().getConsoleSender().sendMessage("[LunariMarket] " + translateColors(message));
     }
-
 }

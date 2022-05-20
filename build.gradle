@@ -30,10 +30,14 @@ repositories {
 }
 
 dependencies {
+    compileOnly 'org.jetbrains:annotations:23.0.0'
     compileOnly 'org.spigotmc:spigot-api:1.18.1-R0.1-SNAPSHOT'
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.1.0-SNAPSHOT'
     compileOnly 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.9-SNAPSHOT'
     compileOnly 'net.coreprotect:coreprotect:21.2'
+
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 }
 
 def targetJavaVersion = 17
