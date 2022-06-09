@@ -44,12 +44,13 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 
             player.sendMessage(ChatMessageUtils.translateColors("&8&l>&m=====================================&8&l<"));
 
-            return false;
+            return true;
         }
 
         ICommand iCommand = getCommand(args[0]);
 
-        if (iCommand == null || player.hasPermission(iCommand.getPermission())) {
+        if (iCommand == null || !player.hasPermission(iCommand.getPermission())) {
+            player.sendMessage(ChatMessageUtils.translateColors("&cCommand not found or you lack permissions to use that!"));
             return false;
         }
 

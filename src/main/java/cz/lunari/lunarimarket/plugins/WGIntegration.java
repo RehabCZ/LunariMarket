@@ -4,7 +4,7 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
-import cz.lunari.lunarimarket.managers.ConfigManager;
+import cz.lunari.lunarimarket.LunariMarket;
 import cz.lunari.lunarimarket.interfaces.IIntegration;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -32,7 +32,7 @@ public class WGIntegration implements IIntegration {
 
     @Override
     public boolean isEnabled() {
-        return ConfigManager.getBoolean("WorldGuardHook");
+        return LunariMarket.getInstance().getConfigManager().getBoolean("integration.WorldGuard");
     }
 
     @Override

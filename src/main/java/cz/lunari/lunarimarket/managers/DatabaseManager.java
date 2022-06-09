@@ -1,6 +1,7 @@
 package cz.lunari.lunarimarket.managers;
 
 import com.google.common.collect.Lists;
+import cz.lunari.lunarimarket.LunariMarket;
 import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 
 import java.sql.*;
@@ -9,6 +10,7 @@ import java.util.List;
 public class DatabaseManager {
 
     private Connection connection;
+    private final ConfigManager configManager = LunariMarket.getInstance().getConfigManager();
 
     public DatabaseManager() {
         initializeConnection();
@@ -17,8 +19,8 @@ public class DatabaseManager {
     public boolean initializeConnection() {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" +
-                            ConfigManager.getString("database.dbHost") + ":" + ConfigManager.getInteger("database.dbPort") + "/" + ConfigManager.getString("database.dbName"),
-                    ConfigManager.getString("database.username"), ConfigManager.getString("database.password")
+                            configManager.getString("database.dbHost") + ":" + configManager.getInteger("database.dbPort").toString() + "/" + configManager.getString("database.dbName"),
+                    configManager.getString("database.dbUser"), configManager.getString("database.dbPass")
             );
 
             if (!(tableExist("markets")) || !(tableExist("vaults"))) {
@@ -57,8 +59,7 @@ public class DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return false;
+        return true;
     }
 
     private boolean tableExist(String tableName) {
@@ -95,9 +96,8 @@ public class DatabaseManager {
 
     public Connection getConnection() {
         if (!checkConnection()) {
-            return null;
+            return connection;
         }
-
-        return connection;
+        return null;
     }
 }

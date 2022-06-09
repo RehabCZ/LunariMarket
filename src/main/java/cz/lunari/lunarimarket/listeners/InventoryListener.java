@@ -5,6 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
 public class InventoryListener implements Listener {
@@ -16,9 +18,13 @@ public class InventoryListener implements Listener {
         }
 
         InventoryHolder holder = e.getInventory().getHolder();
+        Inventory inventory = e.getClickedInventory();
 
         if (holder instanceof InventoryMenu menu) {
-            e.setCancelled(true);
+
+            if (inventory.getType() != InventoryType.PLAYER){
+                e.setCancelled(true);
+            }
 
             if (e.getCurrentItem() == null || e.isShiftClick()) {
                 return;

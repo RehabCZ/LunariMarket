@@ -1,10 +1,7 @@
 package cz.lunari.lunarimarket;
 
-import cz.lunari.lunarimarket.managers.ConfigManager;
-import cz.lunari.lunarimarket.managers.CommandManager;
-import cz.lunari.lunarimarket.managers.DatabaseManager;
-import cz.lunari.lunarimarket.managers.IntegrationManager;
-import cz.lunari.lunarimarket.managers.ListenerManager;
+import cz.lunari.lunarimarket.managers.*;
+import cz.lunari.lunarimarket.objects.json.Localization;
 import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,6 +13,8 @@ public final class LunariMarket extends JavaPlugin {
 
     @Getter
     private static LunariMarket instance;
+
+    private Localization localization;
 
     private ConfigManager configManager;
 
@@ -30,6 +29,7 @@ public final class LunariMarket extends JavaPlugin {
 
         /* Initialize configManager file */
         configManager = new ConfigManager(this);
+        localization = new Localization(this);
 
         /* Initialize Hooks */
         integrationManager = new IntegrationManager();
@@ -47,7 +47,7 @@ public final class LunariMarket extends JavaPlugin {
         Objects.requireNonNull(getCommand("lunarimarket")).setExecutor(new CommandManager());
 
         /* Hello message */
-        ChatMessageUtils.logConsole(ConfigManager.getString("messages.enabled"));
+        ChatMessageUtils.logConsole(localization.getString("messages","enabled"));
     }
 
     @Override
@@ -56,7 +56,7 @@ public final class LunariMarket extends JavaPlugin {
         databaseManager.closeConnection();
 
         /* Bye message */
-        ChatMessageUtils.logConsole(ConfigManager.getString("messages.disabled"));
+        ChatMessageUtils.logConsole(localization.getString("messages","disabled"));
 
         /* Deconstruct instance */
         instance = null;

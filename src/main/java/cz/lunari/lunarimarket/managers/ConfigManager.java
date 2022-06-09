@@ -1,22 +1,16 @@
 package cz.lunari.lunarimarket.managers;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import cz.lunari.lunarimarket.LunariMarket;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
-public class ConfigManager extends AbstractManager {
-
-    private final Gson gson = new Gson();
-    private final Gson gsonPretty = new Gson()
-            .newBuilder()
-            .setPrettyPrinting()
-            .create();
+public class ConfigManager extends AbstractManager{
 
     private final File file;
-
-    private JsonObject data;
+    private FileConfiguration config;
 
     public ConfigManager(LunariMarket plugin) {
         super(plugin);
@@ -27,7 +21,7 @@ public class ConfigManager extends AbstractManager {
             pluginDirectory.mkdirs();
         }
 
-        this.file = new File(pluginDirectory, "config.json");
+        this.file = new File(pluginDirectory, "config.yml");
 
         initConfig();
     }
@@ -39,48 +33,58 @@ public class ConfigManager extends AbstractManager {
             return;
         }
 
+        createFile();
         loadDefaults();
+    }
+
+    public String getString(String key){
+        return config.getString(key);
+    }
+
+    public Integer getInteger(String key){
+        return config.getInt(key);
+    }
+
+    public Boolean getBoolean(String key){
+        return config.getBoolean(key);
+    }
+
+    private void loadDefaults(){
+        load();
+
+        ConfigurationSection integration = config.createSection("integration");
+        integration.set("WorldGuard", true);
+
+        ConfigurationSection database = config.createSection("database");
+        database.set("dbHost", "localhost");
+        database.set("dbPort", 3306);
+        database.set("dbName", "lunarimarket");
+        database.set("dbUser", "");
+        database.set("dbPass", "");
+
         save();
     }
 
-    public static String getString(String key) {
-        return "";
-    }
-
-    public static int getInteger(String key) {
-        return 1;
-    }
-
-    public static boolean getBoolean(String key) {
-        return false;
-    }
-
-    private void loadDefaults() {
-        data = new JsonObject();
-
-        JsonObject database = new JsonObject();
-        database.addProperty("host", "");
-        database.addProperty("port", 3306);
-        database.addProperty("name", "");
-        database.addProperty("username", "");
-        database.addProperty("password", "");
-
-        data.add("database", database);
-    }
-
-    private void load() {
-        try (FileReader reader = new FileReader(file)) {
-            data = gson.fromJson(reader, JsonObject.class);
-        } catch (IOException e) {
+    private void createFile(){
+        try {
+            file.createNewFile();
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void save() {
-        try (FileWriter writer = new FileWriter(file)) {
-            gsonPretty.toJson(data, writer);
-        } catch (IOException e) {
+    private void load(){
+        this.config = plugin.getConfig();
+    }
+
+    private void save(){
+        try {
+            config.save(file);
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
     }
+
 }

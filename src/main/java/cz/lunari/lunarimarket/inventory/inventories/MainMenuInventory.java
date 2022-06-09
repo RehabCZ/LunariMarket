@@ -12,13 +12,17 @@ import java.util.Collections;
 
 public class MainMenuInventory extends InventoryMenu {
 
+    CreateShopInventory shopInventory;
+
     public MainMenuInventory(InventoryOwner owner) {
         super(owner);
+
+        shopInventory = new CreateShopInventory(owner);
     }
 
     @Override
     public String getInventoryName() {
-        return ChatMessageUtils.translateColors("&6&lLunariMarket &7GUI");
+        return ChatMessageUtils.translateColors(localization.getString("inventory","menu_title"));
     }
 
     @Override
@@ -37,7 +41,7 @@ public class MainMenuInventory extends InventoryMenu {
         switch (item.getType()) {
             case BARREL -> {
                 e.getWhoClicked().closeInventory();
-                e.getWhoClicked().sendMessage(ChatMessageUtils.translateColors("&7You clicked shop Creation"));
+                shopInventory.openInventoryMenu();
             }
 
             case NAME_TAG -> {
@@ -56,12 +60,12 @@ public class MainMenuInventory extends InventoryMenu {
 
     @Override
     public void setMenuItems() {
-        ItemStack createItem = ItemStackUtils.createSimpleItem(Material.BARREL, ChatMessageUtils.translateColors("&a&lCreate shop"), Collections.singletonList(ChatMessageUtils.translateColors("&eCool af.")));
-        ItemStack createVault = ItemStackUtils.createSimpleItem(Material.NAME_TAG, ChatMessageUtils.translateColors("&a&lCreate vault"), Collections.singletonList(ChatMessageUtils.translateColors("&eCool af hehehe.")));
-        ItemStack viewShops = ItemStackUtils.createPlayerSkull(inventoryOwner.getOwner(), ChatMessageUtils.translateColors("&6Loool"), Collections.singletonList(ChatMessageUtils.translateColors("&7Mein god")));
-        ItemStack closeMenu = ItemStackUtils.createSimpleItem(Material.BARRIER, ChatMessageUtils.translateColors("&c&lExit menu"), Collections.singletonList(ChatMessageUtils.translateColors("&eCool af 3.")));
+        ItemStack createShop = ItemStackUtils.createSimpleItem(Material.BARREL, ChatMessageUtils.translateColors(localization.getString("inventory","menu_create_shop")), Collections.singletonList(ChatMessageUtils.translateColors("&eCool af.")));
+        ItemStack createVault = ItemStackUtils.createSimpleItem(Material.NAME_TAG, ChatMessageUtils.translateColors(localization.getString("inventory","menu_create_vault")), Collections.singletonList(ChatMessageUtils.translateColors("&eCool af hehehe.")));
+        ItemStack viewShops = ItemStackUtils.createPlayerSkull(inventoryOwner.getOwner(), ChatMessageUtils.translateColors(localization.getString("inventory","menu_list_shops")), Collections.singletonList(ChatMessageUtils.translateColors("&7Mein god")));
+        ItemStack closeMenu = ItemStackUtils.createSimpleItem(Material.BARRIER, ChatMessageUtils.translateColors(localization.getString("inventory","menu_exit")), Collections.singletonList(ChatMessageUtils.translateColors("&eCool af 3.")));
 
-        inventory.setItem(10, createItem);
+        inventory.setItem(10, createShop);
         inventory.setItem(13, createVault);
         inventory.setItem(16, viewShops);
         inventory.setItem(31, closeMenu);

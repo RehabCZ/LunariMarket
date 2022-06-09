@@ -1,6 +1,9 @@
 package cz.lunari.lunarimarket.inventory;
 
+import cz.lunari.lunarimarket.LunariMarket;
+import cz.lunari.lunarimarket.managers.ConfigManager;
 import cz.lunari.lunarimarket.objects.InventoryOwner;
+import cz.lunari.lunarimarket.objects.json.Localization;
 import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -12,6 +15,10 @@ public abstract class InventoryMenu implements InventoryHolder {
     protected Inventory inventory;
 
     protected InventoryOwner inventoryOwner;
+
+    protected ConfigManager configManager = LunariMarket.getInstance().getConfigManager();
+
+    protected Localization localization = LunariMarket.getInstance().getLocalization();
 
     public InventoryMenu(InventoryOwner inventoryOwner){
         this.inventoryOwner = inventoryOwner;
