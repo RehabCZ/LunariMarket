@@ -9,9 +9,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Collections;
-
 public class CreateShopInventory extends InventoryMenu {
+
+    private final ItemStack increaseCount = ItemStackUtils.createSimpleItem(Material.GREEN_DYE, ChatMessageUtils.translateColors("&2&l+"), null);
+    private final ItemStack decreaseCount = ItemStackUtils.createSimpleItem(Material.RED_DYE, ChatMessageUtils.translateColors("&4&l-"), null);
+    private final ItemStack closeMenu = ItemStackUtils.createSimpleItem(Material.BARRIER, ChatMessageUtils.translateColors(localization.getString("inventory", "menu_exit")), null);
+    private final ItemStack submitShop = ItemStackUtils.createSimpleItem(Material.STRUCTURE_VOID, ChatMessageUtils.translateColors("&2&lSubmit"), null);
+    private final ItemStack filler = ItemStackUtils.createSimpleItem(Material.CYAN_STAINED_GLASS_PANE, "\n", null);
 
     public CreateShopInventory(InventoryOwner inventoryOwner) {
         super(inventoryOwner);
@@ -60,10 +64,6 @@ public class CreateShopInventory extends InventoryMenu {
 
     @Override
     public void setMenuItems() {
-        ItemStack increaseCount = ItemStackUtils.createSimpleItem(Material.GREEN_DYE, ChatMessageUtils.translateColors("&2&l+"), Collections.singletonList("Idk"));
-        ItemStack decreaseCount = ItemStackUtils.createSimpleItem(Material.RED_DYE, ChatMessageUtils.translateColors("&4&l-"), Collections.singletonList("Idk"));
-        ItemStack closeMenu = ItemStackUtils.createSimpleItem(Material.BARRIER, ChatMessageUtils.translateColors(localization.getString("inventory","menu_exit")), Collections.singletonList(ChatMessageUtils.translateColors("&eCool af 3.")));
-        ItemStack submitShop = ItemStackUtils.createSimpleItem(Material.STRUCTURE_VOID, ChatMessageUtils.translateColors("&2&lSubmit"), Collections.singletonList("Idk"));
 
         inventory.setItem(19, increaseCount);
         inventory.setItem(23, increaseCount);
@@ -73,5 +73,7 @@ public class CreateShopInventory extends InventoryMenu {
 
         inventory.setItem(38, closeMenu);
         inventory.setItem(42, submitShop);
+
+        setFiller(filler);
     }
 }

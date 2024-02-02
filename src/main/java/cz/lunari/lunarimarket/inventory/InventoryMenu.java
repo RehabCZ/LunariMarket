@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class InventoryMenu implements InventoryHolder {
@@ -43,5 +44,12 @@ public abstract class InventoryMenu implements InventoryHolder {
     @Override
     public @NotNull Inventory getInventory() {
         return inventory;
+    }
+
+    public void setFiller(ItemStack item) {
+        for (int i = 0; i <= inventory.getSize() - 1; i++) {
+            if (inventory.getItem(i) == null)
+                inventory.setItem(i, item);
+        }
     }
 }

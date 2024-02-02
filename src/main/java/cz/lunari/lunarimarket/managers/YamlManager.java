@@ -37,6 +37,7 @@ public abstract class YamlManager extends AbstractManager {
         }
 
         createFile();
+        load();
         loadDefaults();
         save();
     }
