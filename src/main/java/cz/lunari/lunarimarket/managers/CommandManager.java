@@ -1,9 +1,6 @@
 package cz.lunari.lunarimarket.managers;
 
 import com.google.common.collect.Lists;
-import cz.lunari.lunarimarket.commands.AboutCommand;
-import cz.lunari.lunarimarket.commands.HelpCommand;
-import cz.lunari.lunarimarket.commands.MenuCommand;
 import cz.lunari.lunarimarket.interfaces.ICommand;
 import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 import org.bukkit.command.Command;
@@ -11,29 +8,31 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CommandManager implements CommandExecutor, TabCompleter {
 
     private final List<ICommand> commands = Lists.newArrayList();
 
-    public CommandManager() {
-        registerCommand(new HelpCommand());
-        registerCommand(new AboutCommand());
-        registerCommand(new MenuCommand());
+    public CommandManager(JavaPlugin plugin, String cmdName) {
+        Objects.requireNonNull(plugin.getCommand(cmdName)).setExecutor(this);
     }
 
-    private void registerCommand(ICommand command) {
+    public void addCommand(ICommand command) {
         commands.add(command);
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        if (!(sender instanceof Player player)) {
+        if (!(sender instanceof Player)) {
             return false;
         }
+
+        Player player = (Player) sender;
 
         if (args.length == 0) {
             player.sendMessage(ChatMessageUtils.translateColors("&8&l>&m============&8&l[&6&lLunari Market&8&l]&m============&8&l<"));

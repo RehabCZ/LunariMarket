@@ -1,10 +1,8 @@
 name: LunariMarket
-version: '${version}'
+version: '1.0'
 main: cz.lunari.lunarimarket.LunariMarket
-api-version: 1.18
+api-version: 1.13
 prefix: LunariMarket
-softdepend: [ WorldGuard, CoreProtect, Prism ]
-depend: [ HolographicDisplays ]
 authors: [ Rehab_CZ ]
 description: Shop plugin for Lunari server
 commands:

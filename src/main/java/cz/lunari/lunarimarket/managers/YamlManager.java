@@ -1,27 +1,30 @@
 package cz.lunari.lunarimarket.managers;
 
 import cz.lunari.lunarimarket.LunariMarket;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
 import java.io.IOException;
 
-public class ConfigManager extends AbstractManager{
+public abstract class YamlManager extends AbstractManager {
 
     private final File file;
-    private FileConfiguration config;
+    protected FileConfiguration config;
 
-    public ConfigManager(LunariMarket plugin) {
+    public YamlManager(LunariMarket plugin) {
         super(plugin);
 
         File pluginDirectory = plugin.getDataFolder();
 
         if (!pluginDirectory.exists()) {
-            pluginDirectory.mkdirs();
+            try {
+                pluginDirectory.mkdirs();
+            } catch (SecurityException e) {
+                LunariMarket.getInstance().getLogger().severe(e.getMessage());
+            }
         }
 
-        this.file = new File(pluginDirectory, "config.yml");
+        this.file = new File(pluginDirectory, filename());
 
         initConfig();
     }
@@ -35,6 +38,7 @@ public class ConfigManager extends AbstractManager{
 
         createFile();
         loadDefaults();
+        save();
     }
 
     public String getString(String key){
@@ -49,28 +53,17 @@ public class ConfigManager extends AbstractManager{
         return config.getBoolean(key);
     }
 
-    private void loadDefaults(){
-        load();
 
-        ConfigurationSection integration = config.createSection("integration");
-        integration.set("WorldGuard", true);
+    protected abstract String filename();
 
-        ConfigurationSection database = config.createSection("database");
-        database.set("dbHost", "localhost");
-        database.set("dbPort", 3306);
-        database.set("dbName", "lunarimarket");
-        database.set("dbUser", "");
-        database.set("dbPass", "");
-
-        save();
-    }
+    protected abstract void loadDefaults();
 
     private void createFile(){
         try {
             file.createNewFile();
         }
         catch (IOException e) {
-            e.printStackTrace();
+            LunariMarket.getInstance().getLogger().severe(e.getMessage());
         }
     }
 
@@ -83,7 +76,7 @@ public class ConfigManager extends AbstractManager{
             config.save(file);
         }
         catch (IOException e){
-            e.printStackTrace();
+            LunariMarket.getInstance().getLogger().severe(e.getMessage());
         }
     }
 

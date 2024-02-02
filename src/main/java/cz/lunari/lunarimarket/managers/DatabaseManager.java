@@ -2,6 +2,7 @@ package cz.lunari.lunarimarket.managers;
 
 import com.google.common.collect.Lists;
 import cz.lunari.lunarimarket.LunariMarket;
+import cz.lunari.lunarimarket.config.Configuration;
 import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 
 import java.sql.*;
@@ -10,7 +11,7 @@ import java.util.List;
 public class DatabaseManager {
 
     private Connection connection;
-    private final ConfigManager configManager = LunariMarket.getInstance().getConfigManager();
+    private final Configuration configuration = LunariMarket.getInstance().getConfiguration();
 
     public DatabaseManager() {
         initializeConnection();
@@ -19,8 +20,8 @@ public class DatabaseManager {
     public boolean initializeConnection() {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" +
-                            configManager.getString("database.dbHost") + ":" + configManager.getInteger("database.dbPort").toString() + "/" + configManager.getString("database.dbName"),
-                    configManager.getString("database.dbUser"), configManager.getString("database.dbPass")
+                            configuration.getString("database.dbHost") + ":" + configuration.getInteger("database.dbPort").toString() + "/" + configuration.getString("database.dbName"),
+                    configuration.getString("database.dbUser"), configuration.getString("database.dbPass")
             );
 
             if (!(tableExist("markets")) || !(tableExist("vaults"))) {
@@ -33,7 +34,7 @@ public class DatabaseManager {
 
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LunariMarket.getInstance().getLogger().severe(e.getMessage());
         }
 
         return false;
@@ -44,7 +45,7 @@ public class DatabaseManager {
             try {
                 connection.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LunariMarket.getInstance().getLogger().severe(e.getMessage());
             }
         }
     }
@@ -57,7 +58,7 @@ public class DatabaseManager {
 
             return initializeConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LunariMarket.getInstance().getLogger().severe(e.getMessage());
         }
         return true;
     }
@@ -72,7 +73,7 @@ public class DatabaseManager {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LunariMarket.getInstance().getLogger().severe(e.getMessage());
         }
 
         return false;
@@ -90,7 +91,7 @@ public class DatabaseManager {
                 preparedStatement.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LunariMarket.getInstance().getLogger().severe(e.getMessage());
         }
     }
 

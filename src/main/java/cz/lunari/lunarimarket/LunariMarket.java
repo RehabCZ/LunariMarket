@@ -1,26 +1,27 @@
 package cz.lunari.lunarimarket;
 
-import cz.lunari.lunarimarket.managers.*;
-import cz.lunari.lunarimarket.objects.json.Localization;
+import cz.lunari.lunarimarket.commands.AboutCommand;
+import cz.lunari.lunarimarket.commands.HelpCommand;
+import cz.lunari.lunarimarket.commands.MenuCommand;
+import cz.lunari.lunarimarket.config.Configuration;
+import cz.lunari.lunarimarket.config.Localization;
+import cz.lunari.lunarimarket.listeners.InventoryListener;
+import cz.lunari.lunarimarket.managers.CommandManager;
+import cz.lunari.lunarimarket.managers.DatabaseManager;
+import cz.lunari.lunarimarket.managers.ListenerManager;
 import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Objects;
-
 @Getter
 public final class LunariMarket extends JavaPlugin {
-
     @Getter
     private static LunariMarket instance;
-
     private Localization localization;
-
-    private ConfigManager configManager;
-
+    private Configuration configuration;
     private DatabaseManager databaseManager;
-    private IntegrationManager integrationManager;
     private ListenerManager listenerManager;
+    private CommandManager commandManager;
 
     @Override
     public void onLoad() {
@@ -28,23 +29,25 @@ public final class LunariMarket extends JavaPlugin {
         instance = this;
 
         /* Initialize configManager file */
-        configManager = new ConfigManager(this);
+        configuration = new Configuration(this);
         localization = new Localization(this);
-
-        /* Initialize Hooks */
-        integrationManager = new IntegrationManager();
     }
 
     @Override
     public void onEnable() {
         /* Initialize Events Listener handler */
         listenerManager = new ListenerManager(this);
+        listenerManager.addListener(new InventoryListener());
+        listenerManager.init();
 
         /* Initialize MySQL connection */
         databaseManager = new DatabaseManager();
 
         /* Initialize Command handler */
-        Objects.requireNonNull(getCommand("lunarimarket")).setExecutor(new CommandManager());
+        commandManager = new CommandManager(this, "lunarimarket");
+        commandManager.addCommand(new AboutCommand());
+        commandManager.addCommand(new MenuCommand());
+        commandManager.addCommand(new HelpCommand());
 
         /* Hello message */
         ChatMessageUtils.logConsole(localization.getString("messages","enabled"));

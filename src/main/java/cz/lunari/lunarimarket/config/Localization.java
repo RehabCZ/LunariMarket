@@ -1,4 +1,4 @@
-package cz.lunari.lunarimarket.objects.json;
+package cz.lunari.lunarimarket.config;
 
 import com.google.gson.JsonObject;
 import cz.lunari.lunarimarket.LunariMarket;

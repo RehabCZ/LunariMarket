@@ -2,7 +2,6 @@ package cz.lunari.lunarimarket.managers;
 
 import com.google.common.collect.Lists;
 import cz.lunari.lunarimarket.LunariMarket;
-import cz.lunari.lunarimarket.listeners.InventoryListener;
 import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -16,17 +15,13 @@ public class ListenerManager extends AbstractManager {
 
     public ListenerManager(LunariMarket plugin) {
         super(plugin);
-
-        addListener(new InventoryListener());
-
-        initListeners();
     }
 
-    private void addListener(Listener listener) {
+    public void addListener(Listener listener) {
         listeners.add(listener);
     }
 
-    public void initListeners() {
+    public void init() {
         PluginManager pluginManager = Bukkit.getPluginManager();
 
         for (Listener listener : listeners) {
