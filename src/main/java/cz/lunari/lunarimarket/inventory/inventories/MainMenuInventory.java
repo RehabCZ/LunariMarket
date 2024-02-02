@@ -1,9 +1,9 @@
 package cz.lunari.lunarimarket.inventory.inventories;
 
 import cz.lunari.lunarimarket.inventory.InventoryMenu;
+import cz.lunari.lunarimarket.objects.InventoryOwner;
 import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 import cz.lunari.lunarimarket.utils.ItemStackUtils;
-import cz.lunari.lunarimarket.objects.InventoryOwner;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -39,22 +39,24 @@ public class MainMenuInventory extends InventoryMenu {
         }
 
         switch (item.getType()) {
-            case BARREL -> {
+            case BARREL:
                 e.getWhoClicked().closeInventory();
                 shopInventory.openInventoryMenu();
-            }
+                break;
 
-            case NAME_TAG -> {
+            case NAME_TAG:
                 e.getWhoClicked().closeInventory();
                 e.getWhoClicked().sendMessage(ChatMessageUtils.translateColors("&7You clicked vault Creation"));
-            }
+                break;
 
-            case PLAYER_HEAD -> {
+            case PLAYER_HEAD:
                 e.getWhoClicked().closeInventory();
                 e.getWhoClicked().sendMessage(ChatMessageUtils.translateColors("&7You clicked view your shops"));
-            }
+                break;
 
-            case BARRIER -> e.getWhoClicked().closeInventory();
+            case BARRIER:
+                e.getWhoClicked().closeInventory();
+                break;
         }
     }
 

@@ -20,7 +20,11 @@ public class InventoryListener implements Listener {
         InventoryHolder holder = e.getInventory().getHolder();
         Inventory inventory = e.getClickedInventory();
 
-        if (holder instanceof InventoryMenu menu) {
+        if (holder instanceof InventoryMenu) {
+            InventoryMenu menu = (InventoryMenu) holder;
+
+            if (inventory == null)
+                return;
 
             if (inventory.getType() != InventoryType.PLAYER){
                 e.setCancelled(true);
