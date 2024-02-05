@@ -3,7 +3,6 @@ package cz.lunari.lunarimarket.inventory;
 import cz.lunari.lunarimarket.LunariMarket;
 import cz.lunari.lunarimarket.config.Configuration;
 import cz.lunari.lunarimarket.config.Localization;
-import cz.lunari.lunarimarket.objects.InventoryOwner;
 import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;

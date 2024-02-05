@@ -1,10 +1,10 @@
 package cz.lunari.lunarimarket.config;
 
 import cz.lunari.lunarimarket.LunariMarket;
-import cz.lunari.lunarimarket.managers.YamlManager;
+import cz.lunari.lunarimarket.objects.YamlObject;
 import org.bukkit.configuration.ConfigurationSection;
 
-public class Configuration extends YamlManager {
+public class Configuration extends YamlObject {
 
     public Configuration(LunariMarket plugin) {
         super(plugin);
@@ -17,9 +17,6 @@ public class Configuration extends YamlManager {
 
     @Override
     protected void loadDefaults() {
-        ConfigurationSection integration = config.createSection("integration");
-        integration.set("WorldGuard", true);
-
         ConfigurationSection database = config.createSection("database");
         database.set("dbHost", "localhost");
         database.set("dbPort", 3306);

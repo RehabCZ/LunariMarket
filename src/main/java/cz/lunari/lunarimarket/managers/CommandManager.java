@@ -23,6 +23,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
     }
 
     public void addCommand(ICommand command) {
+        ChatMessageUtils.logConsole("&7Command &2" + command.getName() + "&7 was successfully registered.");
         commands.add(command);
     }
 

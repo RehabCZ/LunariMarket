@@ -1,10 +1,9 @@
 package cz.lunari.lunarimarket.config;
 
-import com.google.gson.JsonObject;
 import cz.lunari.lunarimarket.LunariMarket;
-import cz.lunari.lunarimarket.managers.JsonManager;
+import cz.lunari.lunarimarket.objects.JsonObject;
 
-public class Localization extends JsonManager {
+public class Localization extends JsonObject {
 
     public Localization(LunariMarket plugin) {
         super(plugin);
@@ -17,13 +16,13 @@ public class Localization extends JsonManager {
 
     @Override
     protected void loadDefaults() {
-        data = new JsonObject();
+        data = new com.google.gson.JsonObject();
 
-        JsonObject messages = new JsonObject();
+        com.google.gson.JsonObject messages = new com.google.gson.JsonObject();
         messages.addProperty("enabled","&2Plugin was successfully loaded.");
         messages.addProperty("disabled","&2Plugin was successfully unloaded.");
 
-        JsonObject inventory = new JsonObject();
+        com.google.gson.JsonObject inventory = new com.google.gson.JsonObject();
         inventory.addProperty("menu_title","&6&lLunariMarket &7GUI");
         inventory.addProperty("menu_create_shop", "&a&lCreate shop");
         inventory.addProperty("menu_create_vault", "&a&lCreate vault");

@@ -1,7 +1,7 @@
 package cz.lunari.lunarimarket.managers;
 
 import com.google.common.collect.Maps;
-import cz.lunari.lunarimarket.objects.InventoryOwner;
+import cz.lunari.lunarimarket.inventory.InventoryOwner;
 import org.bukkit.entity.Player;
 
 import java.util.Map;

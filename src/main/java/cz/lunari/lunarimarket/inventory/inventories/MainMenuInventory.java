@@ -1,7 +1,7 @@
 package cz.lunari.lunarimarket.inventory.inventories;
 
 import cz.lunari.lunarimarket.inventory.InventoryMenu;
-import cz.lunari.lunarimarket.objects.InventoryOwner;
+import cz.lunari.lunarimarket.inventory.InventoryOwner;
 import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 import cz.lunari.lunarimarket.utils.ItemStackUtils;
 import org.bukkit.Material;

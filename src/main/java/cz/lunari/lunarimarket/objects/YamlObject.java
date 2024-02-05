@@ -1,4 +1,4 @@
-package cz.lunari.lunarimarket.managers;
+package cz.lunari.lunarimarket.objects;
 
 import cz.lunari.lunarimarket.LunariMarket;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -6,12 +6,12 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.io.File;
 import java.io.IOException;
 
-public abstract class YamlManager extends AbstractManager {
+public abstract class YamlObject extends AbstractObject {
 
     private final File file;
     protected FileConfiguration config;
 
-    public YamlManager(LunariMarket plugin) {
+    public YamlObject(LunariMarket plugin) {
         super(plugin);
 
         File pluginDirectory = plugin.getDataFolder();

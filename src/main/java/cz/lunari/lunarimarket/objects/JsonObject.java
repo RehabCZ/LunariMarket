@@ -1,12 +1,14 @@
-package cz.lunari.lunarimarket.managers;
+package cz.lunari.lunarimarket.objects;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import cz.lunari.lunarimarket.LunariMarket;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
-public abstract class JsonManager extends AbstractManager {
+public abstract class JsonObject extends AbstractObject {
 
     private final Gson gson = new Gson();
     private final Gson gsonPretty = new Gson()
@@ -16,9 +18,9 @@ public abstract class JsonManager extends AbstractManager {
 
     private final File file;
 
-    protected JsonObject data;
+    protected com.google.gson.JsonObject data;
 
-    protected JsonManager(LunariMarket plugin) {
+    protected JsonObject(LunariMarket plugin) {
         super(plugin);
 
         File pluginDirectory = plugin.getDataFolder();
@@ -46,7 +48,7 @@ public abstract class JsonManager extends AbstractManager {
         save();
     }
 
-    private JsonObject getObject(String obj){
+    private com.google.gson.JsonObject getObject(String obj) {
         return data.get(obj).getAsJsonObject();
     }
 
@@ -64,9 +66,9 @@ public abstract class JsonManager extends AbstractManager {
 
     private void load() {
         try (FileReader reader = new FileReader(file)) {
-            data = gson.fromJson(reader, JsonObject.class);
+            data = gson.fromJson(reader, com.google.gson.JsonObject.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            LunariMarket.getInstance().getLogger().severe(e.getMessage());
         }
     }
 
@@ -74,7 +76,7 @@ public abstract class JsonManager extends AbstractManager {
         try (FileWriter writer = new FileWriter(file)) {
             gsonPretty.toJson(data, writer);
         } catch (IOException e) {
-            e.printStackTrace();
+            LunariMarket.getInstance().getLogger().severe(e.getMessage());
         }
     }
 }

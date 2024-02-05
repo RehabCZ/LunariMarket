@@ -1,4 +1,4 @@
-package cz.lunari.lunarimarket.objects;
+package cz.lunari.lunarimarket.inventory;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
