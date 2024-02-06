@@ -13,7 +13,7 @@ public class CreateShopInventory extends InventoryMenu {
 
     private final ItemStack increaseCount = ItemStackUtils.createSimpleItem(Material.GREEN_DYE, ChatMessageUtils.translateColors("&2&l+"), null);
     private final ItemStack decreaseCount = ItemStackUtils.createSimpleItem(Material.RED_DYE, ChatMessageUtils.translateColors("&4&l-"), null);
-    private final ItemStack closeMenu = ItemStackUtils.createSimpleItem(Material.BARRIER, ChatMessageUtils.translateColors(localization.getString("inventory", "menu_exit")), null);
+    private final ItemStack closeMenu = ItemStackUtils.createSimpleItem(Material.BARRIER, ChatMessageUtils.translateColors(localization.getString("inventory.menu_exit")), null);
     private final ItemStack submitShop = ItemStackUtils.createSimpleItem(Material.STRUCTURE_VOID, ChatMessageUtils.translateColors("&2&lSubmit"), null);
     private final ItemStack filler = ItemStackUtils.createSimpleItem(Material.CYAN_STAINED_GLASS_PANE, "\n", null);
 

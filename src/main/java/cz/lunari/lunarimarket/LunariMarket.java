@@ -50,7 +50,7 @@ public final class LunariMarket extends JavaPlugin {
         commandManager.addCommand(new HelpCommand());
 
         /* Hello message */
-        ChatMessageUtils.logConsole(localization.getString("messages","enabled"));
+        ChatMessageUtils.logConsole(localization.getString("messages.enabled"));
     }
 
     @Override
@@ -59,7 +59,7 @@ public final class LunariMarket extends JavaPlugin {
         databaseManager.closeConnection();
 
         /* Bye message */
-        ChatMessageUtils.logConsole(localization.getString("messages","disabled"));
+        ChatMessageUtils.logConsole(localization.getString("messages.disabled"));
 
         /* Deconstruct instance */
         instance = null;

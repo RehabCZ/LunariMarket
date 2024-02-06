@@ -1,35 +1,31 @@
 package cz.lunari.lunarimarket.config;
 
 import cz.lunari.lunarimarket.LunariMarket;
-import cz.lunari.lunarimarket.objects.JsonObject;
+import cz.lunari.lunarimarket.objects.YamlObject;
+import org.bukkit.configuration.ConfigurationSection;
 
-public class Localization extends JsonObject {
+public class Localization extends YamlObject {
 
     public Localization(LunariMarket plugin) {
         super(plugin);
     }
 
     @Override
-    protected String fileName() {
+    protected String filename() {
         return "messages.json";
     }
 
     @Override
     protected void loadDefaults() {
-        data = new com.google.gson.JsonObject();
+        ConfigurationSection messages = config.createSection("messages");
+        messages.set("enabled", "&2Plugin was successfully loaded.");
+        messages.set("disabled", "&2Plugin was successfully unloaded.");
 
-        com.google.gson.JsonObject messages = new com.google.gson.JsonObject();
-        messages.addProperty("enabled","&2Plugin was successfully loaded.");
-        messages.addProperty("disabled","&2Plugin was successfully unloaded.");
-
-        com.google.gson.JsonObject inventory = new com.google.gson.JsonObject();
-        inventory.addProperty("menu_title","&6&lLunariMarket &7GUI");
-        inventory.addProperty("menu_create_shop", "&a&lCreate shop");
-        inventory.addProperty("menu_create_vault", "&a&lCreate vault");
-        inventory.addProperty("menu_list_shops", "&a&lList your shops");
-        inventory.addProperty("menu_exit", "&c&lExit menu");
-
-        data.add("messages", messages);
-        data.add("inventory",inventory);
+        ConfigurationSection inventory = config.createSection("inventory");
+        inventory.set("menu_title", "&6&lLunariMarket &7GUI");
+        inventory.set("menu_create_shop", "&a&lCreate shop");
+        inventory.set("menu_create_vault", "&a&lCreate vault");
+        inventory.set("menu_list_shops", "&a&lList your shops");
+        inventory.set("menu_exit", "&c&lExit menu");
     }
 }
