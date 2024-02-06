@@ -1,6 +1,6 @@
 package cz.lunari.lunarimarket.interfaces;
 
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 
 public interface ICommand {
 
@@ -9,5 +9,7 @@ public interface ICommand {
     String getPermission();
     String getSyntax();
 
-    void execute(Player player, String[] args);
+    Boolean runInConsole();
+
+    void execute(CommandSender sender, String[] args);
 }

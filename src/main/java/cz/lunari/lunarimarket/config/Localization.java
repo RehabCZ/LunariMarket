@@ -11,7 +11,7 @@ public class Localization extends YamlObject {
     }
 
     @Override
-    protected String filename() {
+    protected String fileName() {
         return "messages";
     }
 

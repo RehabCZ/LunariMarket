@@ -1,19 +1,19 @@
 package cz.lunari.lunarimarket.commands;
 
+import cz.lunari.lunarimarket.LunariMarket;
 import cz.lunari.lunarimarket.interfaces.ICommand;
 import cz.lunari.lunarimarket.utils.ChatMessageUtils;
 import org.bukkit.command.CommandSender;
 
-public class AboutCommand implements ICommand {
-
+public class ReloadCommand implements ICommand {
     @Override
     public String getName() {
-        return "about";
+        return "reload";
     }
 
     @Override
     public String getDescription() {
-        return "About this plugin";
+        return "Reloads plugin configuration";
     }
 
     @Override
@@ -23,16 +23,20 @@ public class AboutCommand implements ICommand {
 
     @Override
     public String getSyntax() {
-        return "/lunarimarket about";
+        return "/lunarimarket reload";
     }
 
     @Override
     public Boolean runInConsole() {
-        return false;
+        return true;
     }
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        sender.sendMessage(ChatMessageUtils.translateColors("&7Plugin made with &4❤&7 by Rehab_CZ"));
+        //TODO: In the future we will need to reload storage (database) and some kind of shop manager
+        LunariMarket.getInstance().getConfiguration().reload();
+        LunariMarket.getInstance().getLocalization().reload();
+
+        sender.sendMessage(ChatMessageUtils.translateColors("&2Config file was successfully reloaded!"));
     }
 }

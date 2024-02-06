@@ -24,22 +24,25 @@ public abstract class YamlObject extends AbstractObject {
             }
         }
 
-        this.file = new File(pluginDirectory, filename() + ".yml");
+        this.file = new File(pluginDirectory, fileName() + ".yml");
 
         initConfig();
     }
 
+    protected abstract String fileName();
+
+    protected abstract void loadDefaults();
+
     private void initConfig() {
         if (file.exists()){
-            load();
-
+            loadFile();
             return;
         }
 
         createFile();
-        load();
+        loadFile();
         loadDefaults();
-        save();
+        saveFile();
     }
 
     public String getString(String key){
@@ -54,11 +57,6 @@ public abstract class YamlObject extends AbstractObject {
         return config.getBoolean(key);
     }
 
-
-    protected abstract String filename();
-
-    protected abstract void loadDefaults();
-
     private void createFile(){
         try {
             file.createNewFile();
@@ -68,17 +66,21 @@ public abstract class YamlObject extends AbstractObject {
         }
     }
 
-    private void load(){
+    private void loadFile() {
         this.config = plugin.getConfig();
     }
 
-    private void save(){
+    private void saveFile() {
         try {
             config.save(file);
         }
         catch (IOException e){
             LunariMarket.getInstance().getLogger().severe(e.getMessage());
         }
+    }
+
+    public void reload() {
+        loadFile();
     }
 
 }

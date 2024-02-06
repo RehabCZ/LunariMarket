@@ -1,8 +1,9 @@
 package cz.lunari.lunarimarket.commands;
 
-import cz.lunari.lunarimarket.managers.InventoryManager;
 import cz.lunari.lunarimarket.interfaces.ICommand;
 import cz.lunari.lunarimarket.inventory.inventories.MainMenuInventory;
+import cz.lunari.lunarimarket.managers.InventoryManager;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class MenuCommand implements ICommand {
@@ -27,9 +28,14 @@ public class MenuCommand implements ICommand {
     }
 
     @Override
-    public void execute(Player player, String[] args) {
+    public Boolean runInConsole() {
+        return false;
+    }
+
+    @Override
+    public void execute(CommandSender sender, String[] args) {
         InventoryManager handler = new InventoryManager();
-        MainMenuInventory menu = new MainMenuInventory(handler.getInventoryOwner(player));
+        MainMenuInventory menu = new MainMenuInventory(handler.getInventoryOwner((Player) sender));
         menu.openInventoryMenu();
     }
 }

@@ -3,6 +3,7 @@ package cz.lunari.lunarimarket;
 import cz.lunari.lunarimarket.commands.AboutCommand;
 import cz.lunari.lunarimarket.commands.HelpCommand;
 import cz.lunari.lunarimarket.commands.MenuCommand;
+import cz.lunari.lunarimarket.commands.ReloadCommand;
 import cz.lunari.lunarimarket.config.Configuration;
 import cz.lunari.lunarimarket.config.Localization;
 import cz.lunari.lunarimarket.listeners.InventoryListener;
@@ -48,6 +49,7 @@ public final class LunariMarket extends JavaPlugin {
         commandManager.addCommand(new AboutCommand());
         commandManager.addCommand(new MenuCommand());
         commandManager.addCommand(new HelpCommand());
+        commandManager.addCommand(new ReloadCommand());
 
         /* Hello message */
         ChatMessageUtils.logConsole(localization.getString("messages.enabled"));

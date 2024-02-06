@@ -11,7 +11,7 @@ public class Configuration extends YamlObject {
     }
 
     @Override
-    protected String filename() {
+    protected String fileName() {
         return "config";
     }
 

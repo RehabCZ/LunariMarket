@@ -3,10 +3,7 @@ package cz.lunari.lunarimarket.managers;
 import com.google.common.collect.Lists;
 import cz.lunari.lunarimarket.interfaces.ICommand;
 import cz.lunari.lunarimarket.utils.ChatMessageUtils;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -29,34 +26,32 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            return false;
-        }
 
-        Player player = (Player) sender;
-
-        if (args.length == 0) {
-            player.sendMessage(ChatMessageUtils.translateColors("&8&l>&m============&8&l[&6&lLunari Market&8&l]&m============&8&l<"));
-
-            for (ICommand iCommand : commands) {
-                player.sendMessage(iCommand.getSyntax() + " - " + iCommand.getDescription());
-            }
-
-            player.sendMessage(ChatMessageUtils.translateColors("&8&l>&m=====================================&8&l<"));
-
+        if (args.length == 0 || getCommand(args[0]) == null) {
+            showHelp(sender);
             return true;
         }
 
         ICommand iCommand = getCommand(args[0]);
 
-        if (iCommand == null || !player.hasPermission(iCommand.getPermission())) {
-            player.sendMessage(ChatMessageUtils.translateColors("&cCommand not found or you lack permissions to use that!"));
-            return false;
+        if (sender instanceof ConsoleCommandSender) {
+            if (iCommand.runInConsole()) {
+                iCommand.execute(sender, args);
+            } else
+                sender.sendMessage(ChatMessageUtils.translateColors("&cThis command cannot run in console!"));
+            return true;
         }
 
-        iCommand.execute(player, args);
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            if (player.hasPermission(iCommand.getPermission())) {
+                iCommand.execute(sender, args);
+            } else
+                player.sendMessage(ChatMessageUtils.translateColors("&cYou don't have permission to use that!"));
+            return true;
+        }
 
-        return true;
+        return false;
     }
 
     @Override
@@ -68,7 +63,8 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         }
 
         for (ICommand iCommand : commands) {
-            listCommands.add(iCommand.getName());
+            if (sender.hasPermission(iCommand.getPermission()))
+                listCommands.add(iCommand.getName());
         }
 
         return listCommands;
@@ -82,5 +78,26 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         }
 
         return null;
+    }
+
+    public void showHelp(CommandSender sender) {
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            player.sendMessage(ChatMessageUtils.translateColors("&8&l>&m============&8&l[&6&lLunari Market&8&l]&m============&8&l<"));
+
+            for (ICommand iCommand : commands) {
+                if (player.hasPermission(iCommand.getPermission()))
+                    player.sendMessage(iCommand.getSyntax() + " - " + iCommand.getDescription());
+            }
+
+            player.sendMessage(ChatMessageUtils.translateColors("&8&l>&m=====================================&8&l<"));
+        }
+
+        if (sender instanceof ConsoleCommandSender) {
+            for (ICommand iCommand : commands) {
+                if (iCommand.runInConsole())
+                    sender.sendMessage(iCommand.getSyntax() + " - " + iCommand.getDescription());
+            }
+        }
     }
 }

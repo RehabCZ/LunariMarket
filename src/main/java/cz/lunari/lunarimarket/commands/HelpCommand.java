@@ -1,7 +1,8 @@
 package cz.lunari.lunarimarket.commands;
 
+import cz.lunari.lunarimarket.LunariMarket;
 import cz.lunari.lunarimarket.interfaces.ICommand;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 
 public class HelpCommand implements ICommand {
 
@@ -26,9 +27,12 @@ public class HelpCommand implements ICommand {
     }
 
     @Override
-    public void execute(Player player, String[] args) {
-        // Just alias for plain command without args to display help command
-        // TODO: Call directly target command's execute method
-        player.performCommand("lunarimarket");
+    public Boolean runInConsole() {
+        return true;
+    }
+
+    @Override
+    public void execute(CommandSender sender, String[] args) {
+        LunariMarket.getInstance().getCommandManager().showHelp(sender);
     }
 }
