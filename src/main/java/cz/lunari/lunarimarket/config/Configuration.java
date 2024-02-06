@@ -12,7 +12,7 @@ public class Configuration extends YamlObject {
 
     @Override
     protected String filename() {
-        return "config.yml";
+        return "config";
     }
 
     @Override

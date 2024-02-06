@@ -12,7 +12,7 @@ public class Localization extends YamlObject {
 
     @Override
     protected String filename() {
-        return "messages.json";
+        return "messages";
     }
 
     @Override

@@ -24,7 +24,7 @@ public abstract class YamlObject extends AbstractObject {
             }
         }
 
-        this.file = new File(pluginDirectory, filename());
+        this.file = new File(pluginDirectory, filename() + ".yml");
 
         initConfig();
     }
